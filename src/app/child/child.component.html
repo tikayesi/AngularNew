@@ -1,0 +1,8 @@
+<h3>Child Component</h3>
+
+<label>First Name</label>
+<input type="text" #ccomponent (keyup)="onChange(ccomponent.value)"/><br/>
+<p>Value of parent first name is: {{ PData }}</p>
+<p>Value of parent Last name is: {{ PData2 }}</p>
+<app-parent *ngIf="showChild"></app-parent>
+<button (click)="check()" >Check</button>

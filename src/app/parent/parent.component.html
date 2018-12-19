@@ -1,0 +1,16 @@
+
+<h3>Parent Component</h3>
+<!-- <div *ngIf="showFiles"> -->
+    
+<label>Parent First Name</label>
+<input type="text" #pcomponent (keyup)="0"/><br/>
+<label>Parent Last Name</label>
+<input type="text" #pcomponentt (keyup)="0"/>
+<!-- </div> -->
+<!-- <button (click)="check()" >Check</button> -->
+<!-- <button (click)="show()" >Show</button>
+<button (click)="hide()">Hide</button> -->
+
+
+<p>Value of child component is: {{ CData }}</p>
+<app-child [PData]="pcomponent.value" [PData2]="pcomponentt.value" (childEvent)="CData=$event"></app-child>

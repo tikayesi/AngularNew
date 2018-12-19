@@ -1,0 +1,29 @@
+<html>
+  <head>
+<title>This is my Angular</title>
+  </head>
+  <body>
+    <table border="1">
+      <thead>
+        <th>Account Number</th>
+        <th>Open Date</th>
+        <th> Balance</th>
+        <th> Customer Id</th>
+        <th> Action </th>
+      </thead>
+      <tbody>
+        <tr *ngFor="let acco of listAccount">
+          <td><a (click)="selectAccount(acco);"><u>{{acco.accountNumber}}</u></a></td>
+          <td>{{acco.openDate}}</td>
+          <td>{{acco.balance}}</td>
+          <td>{{acco.customerId}}</td>
+          <td>
+          <button (click)="deleteacc(acco.accountNumber)">clear</button></td>
+        </tr>
+      </tbody>
+    </table>
+    <div>
+      <app-account-form *ngIf="showDetailAcc" [account]="selectedAccount" (result)="prosesResult($event)"></app-account-form>
+    </div>
+  </body>
+</html>

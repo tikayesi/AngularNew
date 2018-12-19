@@ -1,0 +1,26 @@
+<html>
+  <head>
+    <title>
+
+    </title>
+  </head>
+  <body><h1> Form Account </h1>
+    <table>
+      <tr><td>Open Date:</td>
+      <td> <input type="date"  [(ngModel)]="account.openDate"></td><br>
+    </tr>
+    <tr>
+      <td>Balance: </td>
+      <td><input type="number" [(ngModel)]="account.balance"></td>
+    </tr>
+    <tr>
+      <td>Customer Id: </td>
+      <td><input type="Customer" [(ngModel)]="account.customerId"></td>
+    </tr>
+    </table>
+
+    <button type="button" (click)="cancel()">Cancel</button>
+    <button type="button" (click)="submit()">Update</button>
+    <button type="button" (click)="insert()">Insert</button>
+  </body>
+</html>

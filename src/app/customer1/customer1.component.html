@@ -1,0 +1,44 @@
+<p>
+  FirstName: <input [(ngModel)]="FirstName">
+  <br/>
+  Lastname: <input [(ngModel)]="Lastname">
+  <br/>
+  Username: <input [(ngModel)]="Username">
+  <br/>
+  Password: <input [(ngModel)]="Password">
+  <br/>
+  PhoneNumber:<input [(ngModel)]="PhoneNumber">
+  <br/>
+  PhoneType:<input [(ngModel)]="PhoneType">
+  <br/>
+  <button (click)="ok()">Done</button>
+  <br/>
+  
+  THE RESULT<br/>
+
+  First Name : {{FirstName}}<br/>
+  Last Name : {{Lastname}}<br/>
+  Username : {{Username}}<br/>
+  Password :  {{Password}}<br/>
+  Phone Number : {{PhoneNumber}}<br/>
+  Phone Type : {{PhoneType}}<br/>
+</p>
+
+<app-test *ngIf="showChild"></app-test>
+<button (click)="show()">Show</button>
+<button (click)="hide()">Hide</button>
+<!-- <app-testlagi></app-testlagi> -->
+
+<!-- <input type="text" #component (keyup)="0"/> -->
+
+<h3>Parent Component</h3>
+
+<label>Parent Component</label>
+<input type="text" #pcomponent (keyup)="0"/>
+
+<p>Value of child component is:  {{ CData }}</p>
+<!-- <app-testlagi [PData]="pcomponent.value"></app-testlagi> -->
+<app-testlagi [PData]="pcomponent.value" (childEvent)="CData=$event"></app-testlagi>
+
+
+
