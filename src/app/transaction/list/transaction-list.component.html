@@ -1,0 +1,32 @@
+<html>
+  <head>
+<title>This is my Angular</title>
+  </head>
+  <body>
+    <table class="table table-striped">
+      <thead>
+        <th scope="col">Id Transaction</th>
+        <th scope="col">Type</th>
+        <th scope="col"> Amount </th>
+        <th scope="col"> Amount Sign</th>
+        <th scope="col"> Open Date </th>
+        <th scope="col"> Action </th>
+      </thead>
+      <tbody>
+        <tr *ngFor="let tran of listTransaction">
+          <td><a (click)="selectTransaction(tran);"><u>{{tran.idTransaction}}</u></a></td>
+          <td>{{tran.type}}</td>
+          <td>{{tran.amount}}</td>
+          <td>{{tran.amountSign}}</td>
+          <td>{{tran.accountId ? tran.accountId.openDate : " "}}</td>
+          
+          <td>
+          <button type="button" class="btn btn-danger" (click)="deleteTr(tran.idTransaction)">clear</button></td>
+        </tr>
+      </tbody>
+    </table>
+    <div>
+      <app-transaction-form #formTransaction *ngIf="showDetailTr" [transaction]="selectedTransaction" (result)="prosesResult($event)"></app-transaction-form>
+    </div>
+  </body>
+</html>

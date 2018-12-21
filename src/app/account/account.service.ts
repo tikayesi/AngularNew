@@ -10,8 +10,12 @@ export class AccountService {
 
   constructor(private httpClient:HttpClient) { }
 
-  getListAcc(){
-    return this.httpClient.get('http://localhost:8080/account/inilist');
+  getListAcc(customerNumber){
+    let params : String="";
+    if(customerNumber){
+      params="?customerId="+customerNumber;
+    }
+    return this.httpClient.get('http://localhost:8080/account/list'+ params);
   }
 
   updateAcc(account: Account){

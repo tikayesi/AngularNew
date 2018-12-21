@@ -3,27 +3,30 @@
 <title>This is my Angular</title>
   </head>
   <body>
-    <table border="1">
+      <button type="button" class="btn btn-danger" [routerLink]="['/create-form']" routerLinkActive="router-link-active">Add</button>
+    <table class="table table-striped">
       <thead>
-        <th>Account Number</th>
-        <th>Open Date</th>
-        <th> Balance</th>
-        <th> Customer Id</th>
-        <th> Action </th>
+        <th scope="col">Account Number</th>
+        <th scope="col">Open Date</th>
+        <th scope="col"> Balance</th>
+        <th scope="col"> Customer Name</th>
+        <th scope="col"> Action </th>
       </thead>
       <tbody>
         <tr *ngFor="let acco of listAccount">
           <td><a (click)="selectAccount(acco);"><u>{{acco.accountNumber}}</u></a></td>
           <td>{{acco.openDate}}</td>
-          <td>{{acco.balance}}</td>
-          <td>{{acco.customerId}}</td>
+          <!-- <td>{{acco.balance | enigma}}</td> -->
+          <td>{{acco.balance | currency:'Rp '}}</td>
+          <td>{{acco.customerId ? acco.customerId.firstName : " "}}</td>
           <td>
-          <button (click)="deleteacc(acco.accountNumber)">clear</button></td>
+          <button type="button" class="btn btn-danger" (click)="deleteacc(acco.accountNumber)">clear</button>
+        </td>
         </tr>
       </tbody>
     </table>
     <div>
-      <app-account-form *ngIf="showDetailAcc" [account]="selectedAccount" (result)="prosesResult($event)"></app-account-form>
+      <app-account-form #formAccount *ngIf="showDetailAcc" [account]="selectedAccount" (result)="prosesResult($event)"></app-account-form>
     </div>
   </body>
 </html>

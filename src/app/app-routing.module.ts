@@ -9,6 +9,10 @@ import { CustomerListComponent } from './customer/list/customer-list.component';
 import { CustomerFormComponent } from './customer/form/customer-form.component';
 import { AccountListComponent } from './account/list/account-list.component';
 import { AccountFormComponent } from './account/form/account-form.component';
+import { TransactionFormComponent } from './transaction/form/transaction-form.component';
+import { TransactionListComponent } from './transaction/list/transaction-list.component';
+import { CreateAccountComponent } from './account/create/create-account.component';
+import { CreateCustomerComponent } from './customer/create/create-customer.component';
 
 const routes: Routes = [
   {
@@ -42,6 +46,22 @@ const routes: Routes = [
   {
     path: 'account-form',
     component: AccountFormComponent
+  },
+  {
+    path: 'transaction-form',
+    component: TransactionFormComponent
+  },
+  {
+    path: 'transaction-list',
+    component: TransactionListComponent
+  },
+  {
+    path: 'create-form',
+    component: CreateAccountComponent
+  },
+  {
+    path: 'create-customer',
+    component: CreateCustomerComponent
   }
   
 ];

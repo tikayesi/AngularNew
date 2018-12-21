@@ -22,6 +22,7 @@ export class CustomerService {
   }
 
   delete(customer){
+    console.log("deleting " + customer);
     return this.httpClient.delete('http://localhost:8080/test/Customer/'+ customer);
   }
 }

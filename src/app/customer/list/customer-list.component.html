@@ -3,17 +3,18 @@
 <title>This is my Angular</title>
   </head>
   <body>
-    <table border="1">
+      <button type="button" class="btn btn-danger" [routerLink]="['/create-customer']" routerLinkActive="router-link-active">Add</button>
+    <table class="table table-striped">
       <thead>
-        <th>Customer Number</th>
-        <th>First Name</th>
-        <th> Last Name</th>
-        <th> Birth Date</th>
-        <th> Username</th>
-        <th> Password</th>
-        <th>Phone Number</th>
-        <th> Phone Type</th>
-        <th> Action </th>
+        <th scope="col">Customer Number</th>
+        <th scope="col">First Name</th>
+        <th scope="col"> Last Name</th>
+        <th scope="col"> Birth Date</th>
+        <th scope="col"> Username</th>
+        <th scope="col"> Password</th>
+        <th scope="col">Phone Number</th>
+        <th scope="col"> Phone Type</th>
+        <th scope="col"> Action </th>
       </thead>
       <tbody>
         <tr *ngFor="let cust of listCustomer">
@@ -23,15 +24,17 @@
           <td>{{cust.birthDate}}</td>
           <td>{{cust.username}}</td>
           <td>{{cust.password}}</td>
-          <td>{{cust.phoneNumber}}</td>
+          <td>{{cust.phoneNumber | enigma}}</td>
           <td>{{cust.phoneType}}</td>
           <td>
-          <button (click)="delete(cust.customerNumber)">clear</button></td>
+          <button type="button" class="btn btn-danger" (click)="delete(cust.customerNumber)">clear</button>
+          &nbsp;<button type="button" class="btn btn-success" (click)="viewAccount(cust)"> View Account</button></td>
         </tr>
       </tbody>
     </table>
     <div>
-      <app-customer-form *ngIf="showDetail" [customer]="selectedCustomer" (result)="prosesResult($event)"></app-customer-form>
+      <app-customer-form #formCustomer *ngIf="showDetail" [customer]="selectedCustomer" (result)="prosesResult($event)"></app-customer-form>
     </div>
+    <app-combo-customer (customer)="setselectCustomer($event)"></app-combo-customer>
   </body>
 </html>

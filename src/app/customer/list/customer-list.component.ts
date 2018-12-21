@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { CustomerService } from '../customer.service';
 import { Customer } from '../customer';
+import { CustomerFormComponent } from '../form/customer-form.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-customer-list',
@@ -8,11 +10,15 @@ import { Customer } from '../customer';
   styleUrls: ['./customer-list.component.css']
 })
 export class CustomerListComponent implements OnInit {
+
+  @ViewChild('formCustomer')
+  formCustomer: CustomerFormComponent;
+
   listCustomer: Customer[] = [];
   showDetail: boolean = true;
   selectedCustomer: Customer = new Customer();
 
-  constructor(private customerService: CustomerService) { }
+  constructor(private customerService: CustomerService, private router: Router) { }
 
   ngOnInit() {
     this.loadData();
@@ -30,6 +36,7 @@ export class CustomerListComponent implements OnInit {
     copyCustomer.phoneType = customer.phoneType;
     this.selectedCustomer = copyCustomer;
     this.showDetail = true;
+    this.formCustomer.updateData();
   }
 
   loadData() {
@@ -51,16 +58,19 @@ export class CustomerListComponent implements OnInit {
   delete(customerNumber) {
     // alert(customerNumber)
     this.customerService.delete(customerNumber).subscribe(
-      (response)=>{
-        location.href="/customer-list";
-    },(err)=>{
-      alert('error : '+JSON.stringify(err));
-    });
-    
-  }
-  
+      (response) => {
+        // location.href = "/customer-list";
+        console.log(JSON.stringify(response));
+      }, (err) => {
+        alert('error : ' + JSON.stringify(err));
+      });
 
   }
+ viewAccount(customer : Customer){
+  this.router.navigate(['/account-list',{customerNumber: customer.customerNumber}]);
+ }
+
+}
 
 
 

@@ -17,7 +17,15 @@ import { CustomerService } from './customer/customer.service';
 import { AccountComponent } from './account/account.component';
 import { AccountListComponent } from './account/list/account-list.component';
 import { AccountFormComponent } from './account/form/account-form.component';
-import { ReactiveComponent } from './reactive/reactive.component';
+import { EnigmaPipe } from './customer/enigma.pipe';
+import { InsertComponent } from './insert/insert.component';
+import { TransactionComponent } from './transaction/transaction.component';
+import { TransactionFormComponent } from './transaction/form/transaction-form.component';
+import { TransactionListComponent } from './transaction/list/transaction-list.component';
+import { SharedComponent } from './shared/shared.component';
+import { ComboCustomerComponent } from './shared/component/customer/combo-customer.component';
+import { CreateAccountComponent } from './account/create/create-account.component';
+import { CreateCustomerComponent } from './customer/create/create-customer.component';
 
 @NgModule({
   declarations: [
@@ -32,13 +40,22 @@ import { ReactiveComponent } from './reactive/reactive.component';
     AccountComponent,
     AccountListComponent,
     AccountFormComponent,
-    ReactiveComponent,
+    EnigmaPipe,
+    InsertComponent,
+    TransactionComponent,
+    TransactionFormComponent,
+    TransactionListComponent,
+    SharedComponent,
+    ComboCustomerComponent,
+    CreateAccountComponent,
+    CreateCustomerComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule
   ],
   providers: [CustomerService],
   bootstrap: [AppComponent]

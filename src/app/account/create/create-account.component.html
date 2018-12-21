@@ -1,0 +1,39 @@
+<html>
+  <head>
+    <title>
+
+    </title>
+  </head>
+  <body><h1> Form Account </h1>
+    <form [formGroup]="accForm">
+    <!-- <table>
+      <tr><td>Open Date:</td>
+      <td> <input type="date"  formControlName="openDate"></td><br>
+    </tr> -->
+        <label for="inputPassword" class="col-sm-2 col-form-label">Open Date</label>
+        <div class="col-sm-10">
+          <input type="date" class="form-control" formControlName="openDate" placeholder="openDate">
+        </div>
+        <label for="inputPassword" class="col-sm-2 col-form-label">Balance</label>
+        <div class="col-sm-10">
+          <input type="number" class="form-control" formControlName="balance" placeholder="balance">
+        </div>
+        <label for="inputPassword" class="col-sm-2 col-form-label">Customer Id</label>
+        <div class="col-sm-10">
+          <input type="number" class="form-control" formControlName="customerId" placeholder="customerId">
+        </div>
+    <!-- <tr>
+      <td>Balance: </td>
+      <td><input type="number" formControlName="balance"></td>
+    </tr>
+    <tr>
+      <td>Customer Id: </td>
+      <td><input type="Customer" formControlName="customerId"></td>
+    </tr> -->
+    <!-- </table> -->
+    </form>
+<br/>
+    <button type="button" class="btn btn-danger" [routerLink]="['/account-list']" routerLinkActive="router-link-active">Cancel</button>
+    &nbsp; <button type="button" class="btn btn-danger"  (click)="insert()">Insert</button>
+  </body>
+</html>

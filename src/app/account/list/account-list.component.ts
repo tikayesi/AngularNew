@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Account } from '../account';
 import { AccountService } from '../account.service';
+import { AccountFormComponent } from '../form/account-form.component';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-account-list',
@@ -8,15 +10,26 @@ import { AccountService } from '../account.service';
   styleUrls: ['./account-list.component.css']
 })
 export class AccountListComponent implements OnInit {
+
+  @ViewChild('formAccount')
+  formAccount: AccountFormComponent; 
+
   listAccount: Account[]=[];
-  showDetailAcc:boolean=true;
+  showDetailAcc:boolean=false;
   selectedAccount: Account = new Account();
 
-  constructor(private accountService: AccountService) { }
+
+  constructor(private accountService: AccountService, private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.loadDataAcc();
+    this.route.params.subscribe(
+      params=>{
+        let customerNumber = params['customerNumber'];
+        this.loadDataAcc(customerNumber);
+      }
+    );
   }
+
   selectAccount(account: Account) {
     let copyAccount = new Account();
     copyAccount.accountNumber = account.accountNumber;
@@ -25,15 +38,19 @@ export class AccountListComponent implements OnInit {
     copyAccount.customerId = account.customerId;
     this.selectedAccount = copyAccount;
     this.showDetailAcc = true;
+    this.formAccount.updateData();
   }
-  loadDataAcc() {
-    this.accountService.getListAcc().subscribe((response) => {
+
+  loadDataAcc(customerNumber?) {
+    this.accountService.getListAcc(customerNumber).subscribe((response) => {
       console.log(JSON.stringify(response));
       Object.assign(this.listAccount, response);
     }, (err) => {
       alert('error' + JSON.stringify(err));
     });
+    
   }
+
   prosesResult(result) {
     if (result) {
       this.showDetailAcc = false;
@@ -50,4 +67,5 @@ export class AccountListComponent implements OnInit {
     });
     
   }
+
 }

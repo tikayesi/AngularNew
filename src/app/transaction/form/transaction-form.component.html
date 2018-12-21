@@ -1,0 +1,33 @@
+<html>
+  <head>
+    <title>
+
+    </title>
+  </head>
+  <body><h1> Form Transaction </h1>
+    <form [formGroup]="transactionFormGroup">
+    <table>
+    <tr>
+      <td>Type: </td>
+      <td><input type="string" formControlName="type"></td>
+    </tr>
+    <tr>
+      <td>Amount: </td>
+      <td><input type="string" formControlName="amount"></td>
+    </tr>
+    <tr>
+      <td>Amount Sign: </td>
+      <td><input type="string" formControlName="amountSign"></td>
+    </tr>
+    <tr>
+      <td>Account Id: </td>
+      <td><input type="Account" formControlName="accountId"></td>
+    </tr>
+    </table>
+    </form>
+
+    <button type="button" (click)="cancel()">Cancel</button>
+    <button type="button" (click)="submitTr()">Update</button>
+    <button type="button" (click)="insertT()">Insert</button>
+  </body>
+</html>
