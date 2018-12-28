@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { TransactionService } from '../transaction.service';
 import { Transaction } from '../transaction';
 import { TransactionFormComponent } from '../form/transaction-form.component';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-transaction-list',
@@ -17,10 +18,16 @@ export class TransactionListComponent implements OnInit {
   selectedTransaction: Transaction = new Transaction();
   
 
-  constructor(private transactionService: TransactionService) { }
+  constructor(private transactionService: TransactionService, private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.loadDataTr();
+    this.route.params.subscribe(
+      params=>{
+        let accountNumber = params['accountNumber'];
+        this.loadDataTr(accountNumber);
+      }
+    );
+    // this.loadDataTr();
   }
 
   selectTransaction(transaction: Transaction) {
@@ -36,10 +43,10 @@ export class TransactionListComponent implements OnInit {
   }
 
 
-  loadDataTr() {
-    this.transactionService.getListTr().subscribe((response) => {
+  loadDataTr(accountNumber?) {
+    this.transactionService.getListTr(accountNumber).subscribe((response) => {
       console.log(JSON.stringify(response));
-      Object.assign(this.listTransaction, response);
+      Object.assign(this.listTransaction, response['values']);
     }, (err) => {
       alert('error' + JSON.stringify(err));
     });

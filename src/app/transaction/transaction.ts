@@ -1,4 +1,4 @@
-import { Account} from '../account/account';
+import { Account } from '../account/account';
 
 export class Transaction{
     idTransaction: number;

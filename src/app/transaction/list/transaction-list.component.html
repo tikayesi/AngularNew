@@ -3,6 +3,7 @@
 <title>This is my Angular</title>
   </head>
   <body>
+      <button type="button" class="btn btn-danger" [routerLink]="['/create-transaction']" routerLinkActive="router-link-active">Add</button>
     <table class="table table-striped">
       <thead>
         <th scope="col">Id Transaction</th>
@@ -18,7 +19,9 @@
           <td>{{tran.type}}</td>
           <td>{{tran.amount}}</td>
           <td>{{tran.amountSign}}</td>
-          <td>{{tran.accountId ? tran.accountId.openDate : " "}}</td>
+          <!-- <td>{{tran.accountId ? tran.accountId.openDate : " "}}</td> -->
+          <td>{{tran.account ? tran.account.openDate : ""}}</td>
+          <!-- <td>{{tran.account.openDate}}</td> -->
           
           <td>
           <button type="button" class="btn btn-danger" (click)="deleteTr(tran.idTransaction)">clear</button></td>

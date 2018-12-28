@@ -1,4 +1,4 @@
-import { Component, OnInit, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AccountService } from '../account.service';
 import { Router } from '@angular/router';
@@ -11,32 +11,38 @@ import { Customer } from 'src/app/customer/customer';
   styleUrls: ['./create-account.component.css']
 })
 export class CreateAccountComponent implements OnInit {
-  result = new EventEmitter();
   customer = Object;
+
   accForm : FormGroup;
+
+  @Output()
+  result = new EventEmitter();
+  
 
   constructor(private fb: FormBuilder, private data : AccountService, private router : Router) { }
 
   ngOnInit() {
-    this.createForm();
+    this.accForm = this.fb.group({
+      accountNumber:[''],
+      openDate : ["", Validators.required],
+      balance : ["", Validators.required],
+      customer : ["", Validators.required]
+    });
   }
 
-    createForm(){
-      this.accForm = this.fb.group({
-        openDate : ["", Validators.required],
-        balance : ["", Validators.required],
-        customerId : ["", Validators.required]
-      });
-    }
     insert(){
       let account: Account = new Account();
-      account.accountNumber = this.accForm.controls['accountNumber'].value;
+      
+      // account.accountNumber = this.accForm.controls['accountNumber'].value;
       account.openDate = this.accForm.controls['openDate'].value;
       account.balance = this.accForm.controls['balance'].value;
   
       let customer = new Customer();
-      customer.customerNumber = this.accForm.controls['customerId'].value;
-      account.customerId = customer;
+      customer.customerNumber = this.accForm.controls['customer'].value;
+      account.customer = customer;
+
+      console.log(account);
+
       this.data.insertAcc(account).subscribe(
         (response)=>{
         console.log(JSON.stringify(response));
@@ -53,8 +59,8 @@ export class CreateAccountComponent implements OnInit {
   //   account.balance = this.accForm.controls['balance'].value;
 
   //   let customer = new Customer();
-  //   customer.customerNumber - this.accForm.controls['customerId'].value;
-  //   account.customerId = customer;
+  //   customer.customerNumber - this.accForm.controls['customer'].value;
+  //   account.customer = customer;
 
   //   this.data.insertAcc(account);
   //   this.router.navigate(["/account-list"]);

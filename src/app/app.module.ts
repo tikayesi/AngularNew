@@ -26,6 +26,7 @@ import { SharedComponent } from './shared/shared.component';
 import { ComboCustomerComponent } from './shared/component/customer/combo-customer.component';
 import { CreateAccountComponent } from './account/create/create-account.component';
 import { CreateCustomerComponent } from './customer/create/create-customer.component';
+import { CreateTransactionComponent } from './transaction/create/create-transaction.component';
 
 @NgModule({
   declarations: [
@@ -49,6 +50,7 @@ import { CreateCustomerComponent } from './customer/create/create-customer.compo
     ComboCustomerComponent,
     CreateAccountComponent,
     CreateCustomerComponent,
+    CreateTransactionComponent,
   ],
   imports: [
     BrowserModule,

@@ -25,7 +25,7 @@ export class AccountFormComponent implements OnInit {
       accountNumber: [''],
       openDate: ['', Validators.required],
       balance: ['', Validators.required],
-      customerId: ['', Validators.required],
+      customer: ['', Validators.required],
     });
     this.updateData();
   }
@@ -45,7 +45,7 @@ export class AccountFormComponent implements OnInit {
       this.accountFormGroup.controls['accountNumber'].setValue(this.account.accountNumber);
       this.accountFormGroup.controls['openDate'].setValue(this.account.openDate);
       this.accountFormGroup.controls['balance'].setValue(this.account.balance);
-      this.accountFormGroup.controls['customerId'].setValue(this.account.customerId.customerNumber);
+      this.accountFormGroup.controls['customer'].setValue(this.account.customer.customerNumber);
     }
     }
 
@@ -57,14 +57,14 @@ export class AccountFormComponent implements OnInit {
     account.balance = this.accountFormGroup.controls['balance'].value;
 
     let customer = new Customer();
-    customer.customerNumber = this.accountFormGroup.controls['customerId'].value;
-    account.customerId = customer;
+    customer.customerNumber = this.accountFormGroup.controls['customer'].value;
+    account.customer = customer;
 
     this.accountService.updateAcc(account).subscribe(
       (response)=>{
       console.log(JSON.stringify(response));
       this.result.emit(true);
-      location.href="/account-list";
+      // location.href="/account-list";
     },(err)=>{
       alert('error : '+JSON.stringify(err));
     });
@@ -72,15 +72,17 @@ export class AccountFormComponent implements OnInit {
   cancel(){
     this.result.emit(true);
   }
+
   insert(){
     let account: Account = new Account();
     account.accountNumber = this.accountFormGroup.controls['accountNumber'].value;
     account.openDate = this.accountFormGroup.controls['openDate'].value;
     account.balance = this.accountFormGroup.controls['balance'].value;
 
-    let customer = new Customer();
-    customer.customerNumber = this.accountFormGroup.controls['customerId'].value;
-    account.customerId = customer;
+    // let customer = new Customer();
+    account.customer = this.accountFormGroup.controls['customer'].value;
+    // account.customer = customer;
+    
     this.accountService.insertAcc(account).subscribe(
       (response)=>{
       console.log(JSON.stringify(response));

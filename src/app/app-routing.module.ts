@@ -13,6 +13,7 @@ import { TransactionFormComponent } from './transaction/form/transaction-form.co
 import { TransactionListComponent } from './transaction/list/transaction-list.component';
 import { CreateAccountComponent } from './account/create/create-account.component';
 import { CreateCustomerComponent } from './customer/create/create-customer.component';
+import { CreateTransactionComponent } from './transaction/create/create-transaction.component';
 
 const routes: Routes = [
   {
@@ -62,6 +63,10 @@ const routes: Routes = [
   {
     path: 'create-customer',
     component: CreateCustomerComponent
+  },
+  {
+    path: 'create-transaction',
+    component: CreateTransactionComponent
   }
   
 ];

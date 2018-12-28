@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Account } from '../account';
 import { AccountService } from '../account.service';
 import { AccountFormComponent } from '../form/account-form.component';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-account-list',
@@ -19,7 +19,7 @@ export class AccountListComponent implements OnInit {
   selectedAccount: Account = new Account();
 
 
-  constructor(private accountService: AccountService, private route: ActivatedRoute) { }
+  constructor(private accountService: AccountService, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit() {
     this.route.params.subscribe(
@@ -35,16 +35,16 @@ export class AccountListComponent implements OnInit {
     copyAccount.accountNumber = account.accountNumber;
     copyAccount.openDate = account.openDate;
     copyAccount.balance = account.balance;
-    copyAccount.customerId = account.customerId;
+    copyAccount.customer = account.customer;
     this.selectedAccount = copyAccount;
     this.showDetailAcc = true;
-    this.formAccount.updateData();
+    // this.formAccount.updateData();
   }
 
   loadDataAcc(customerNumber?) {
     this.accountService.getListAcc(customerNumber).subscribe((response) => {
       console.log(JSON.stringify(response));
-      Object.assign(this.listAccount, response);
+      Object.assign(this.listAccount, response['values']);
     }, (err) => {
       alert('error' + JSON.stringify(err));
     });
@@ -54,7 +54,7 @@ export class AccountListComponent implements OnInit {
   prosesResult(result) {
     if (result) {
       this.showDetailAcc = false;
-      this.loadDataAcc();
+      //this.loadDataAcc();
     }
   }
   deleteacc(accountNumber) {
@@ -67,5 +67,8 @@ export class AccountListComponent implements OnInit {
     });
     
   }
+  viewTransaction(account : Account){
+    this.router.navigate(['/transaction-list',{accountNumber: account.accountNumber}]);
+   }
 
 }

@@ -18,9 +18,11 @@
           <td>{{acco.openDate}}</td>
           <!-- <td>{{acco.balance | enigma}}</td> -->
           <td>{{acco.balance | currency:'Rp '}}</td>
-          <td>{{acco.customerId ? acco.customerId.firstName : " "}}</td>
+          <td>{{acco.customer ? acco.customer.customerNumber : ""}}</td>
+          <!-- <td>{{acco.customer.firstName}}</td> -->
           <td>
           <button type="button" class="btn btn-danger" (click)="deleteacc(acco.accountNumber)">clear</button>
+          <button type="button" class="btn btn-success" (click)="viewTransaction(acco)">view Trans</button>
         </td>
         </tr>
       </tbody>

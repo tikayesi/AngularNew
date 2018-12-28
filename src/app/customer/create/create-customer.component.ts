@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { AccountService } from 'src/app/account/account.service';
 import { Router } from '@angular/router';
 import { Customer } from '../customer';
+import { CustomerService } from '../customer.service';
 
 @Component({
   selector: 'app-create-customer',
@@ -12,16 +12,17 @@ import { Customer } from '../customer';
 export class CreateCustomerComponent implements OnInit {
   custForm : FormGroup;
 
-  constructor(private fb: FormBuilder, private data : AccountService, private router : Router) { }
+  @Output()
+  result = new EventEmitter();
+  
+
+  constructor(private fb: FormBuilder, private customerService: CustomerService, private router : Router) { }
 
   ngOnInit() {
-    this.createForm();
-  }
-  createForm(){
     this.custForm = this.fb.group({
       firstName : ["", Validators.required],
       lastName : ["", Validators.required],
-      birtDate : ["", Validators.required],
+      birthDate : ["", Validators.required],
       username : ["", Validators.required],
       password : ["", Validators.required],
       phoneNumber : ["", Validators.required],
@@ -39,8 +40,17 @@ export class CreateCustomerComponent implements OnInit {
     customer.phoneNumber = this.custForm.controls['phoneNumber'].value;
     customer.phoneType = this.custForm.controls['phoneType'].value;
 
-    this.data.insert(customer);
-    this.router.navigate(["/customer-list"]);
+    this.customerService.insert(customer).subscribe(
+      (response)=>{
+      console.log(JSON.stringify(response));
+      this.router.navigate(["/customer-list"]);
+      this.result.emit(true);
+    },(err)=>{
+      alert('error : '+JSON.stringify(err));
+    });
+
+    // this.data.insert(customer);
+   
   }
 
 }

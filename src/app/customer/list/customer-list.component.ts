@@ -42,7 +42,8 @@ export class CustomerListComponent implements OnInit {
   loadData() {
     this.customerService.getList().subscribe((response) => {
       console.log(JSON.stringify(response));
-      Object.assign(this.listCustomer, response);
+      
+      Object.assign(this.listCustomer, response['values']);
     }, (err) => {
       alert('error' + JSON.stringify(err));
     });
@@ -59,13 +60,14 @@ export class CustomerListComponent implements OnInit {
     // alert(customerNumber)
     this.customerService.delete(customerNumber).subscribe(
       (response) => {
-        // location.href = "/customer-list";
-        console.log(JSON.stringify(response));
+        // console.log(JSON.stringify(response));
+        location.href = "/customer-list";
       }, (err) => {
         alert('error : ' + JSON.stringify(err));
       });
 
   }
+
  viewAccount(customer : Customer){
   this.router.navigate(['/account-list',{customerNumber: customer.customerNumber}]);
  }
